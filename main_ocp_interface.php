@@ -75,6 +75,24 @@ class FoodProduct implements ProductInterface {
     }
 }
 
+// Produk elektonik
+class ElectronicProduct implements ProductInterface {
+    private float $basePrice;
+    private int $quantity;
+
+    public function __construct(float $basePrice, int $quantity) {
+        $this->basePrice = $basePrice;
+        $this->quantity = $quantity;
+    }
+
+    public function calculatePrice(): float {
+        $discount = $this->basePrice - ($this->basePrice * 0.03); // diskon 3%
+        $tax = $discount * 0.11; // Pajak 11%
+        $priceAfterTax = $discount + $tax;
+        return $priceAfterTax * $this->quantity;
+    }
+}
+
 // Shopping Cart
 class ShoppingCart {
     private array $products = [];
@@ -94,5 +112,6 @@ $cart->addProduct(new RegularProduct(100, 2)); // 2 produk reguler dengan harga 
 $cart->addProduct(new DiscountedProduct(200, 3, 20)); // 3 produk diskon dengan harga 200 dan diskon 20%
 $cart->addProduct(new WholesaleProduct(50, 15)); // 15 produk grosir dengan harga 50
 $cart->addProduct(new FoodProduct(30, 5)); // 5 produk makanan dengan harga 30
+$cart->addProduct(new ElectronicProduct(150, 2)); // 2 produk elektronik dengan harga 150
 
 echo "Total: " . $cart->calculateTotal();
