@@ -32,14 +32,14 @@ class Products
 
     function calculateTotalPrice($products, $category)
     {
-        $totalElectronics = 0;
+        $totalProduct = 0;
         foreach ($products as $product) {
             if ($product['category'] === $category) {
 
-                $totalElectronics += $product['price'];
+                $totalProduct += $product['price'];
             }
         }
-        echo "Total " . $category . ": $totalElectronics\n";
+        echo "Total " . $category . ": $totalProduct\n";
     }
 
     function filterProducts($products, $category)
