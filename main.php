@@ -1,79 +1,94 @@
 <?php
-// Data produk
-$products = [
-    ["id" => 1, "name" => "Laptop",
-    "price" => 1500, "category" => "Electronics"],
-    ["id" => 2, "name" => "Phone", "price" => 800, "category" => "Electronics"
-],
-    ["id" => 3, "name" => "Desk", "price" => 200, "category" => "Furniture"],
-    ["id" => 4, "name" => "Chair", "price" => 100, "category" => "Furniture"],
-    ["id" => 5, "name" => "TV", "price" => 500, "category" => "Electronics"]
-    ,
+
+class Products
+{
+    public $products;
+
+    public function __construct($products)
+    {
+        $this->products = $products;
+    }
+
+    function showAllProduct()
+    {
+        $products = [];
+        foreach ($this->products as $product) {
+            $products[] = $product;
+        }
+        return $products;
+    }
+
+    function productsByCategory($category)
+    {
+        $products = [];
+        foreach ($this->products as $product) {
+            if ($product['category'] === $category) {
+                $products[] = $product;
+            }
+        }
+        return $products;
+    }
+
+    function sumTotalByCategory($category)
+    {
+        $totalFurniture = 0;
+        foreach ($this->products as $product) {
+            if ($product['category'] === $category) {
+                $totalFurniture += $product['price'];
+            }
+        }
+        return $totalFurniture;
+    }
+
+    function countByCategory($category)
+    {
+        $count = 0;
+        foreach ($this->products as $product) {
+            if ($product['category'] === $category) {
+                $count++;
+            }
+        }
+        return $count;
+    }
+}
+
+
+$productItems = [
+    ['id' => 1, 'name' => 'Laptop', 'price' => 1500, 'category' => 'Electronics'],
+    ['id' => 2, 'name' => 'Phone', 'price' => 800, 'category' => 'Electronics'],
+    ['id' => 3, 'name' => 'Desk', 'price' => 200, 'category' => 'Furniture'],
+    ['id' => 4, 'name' => 'Chair', 'price' => 100, 'category' => 'Furniture'],
+    ['id' => 5, 'name' => 'TV', 'price' => 500, 'category' => 'Electronics'],
 ];
 
-// Tampilkan semua produk
-echo "=== Produk ===\n";
-foreach ($products as $product) {
-    
+$products = new Products($productItems);
+
+// Call showAllProduct and echo each product
+foreach ($products->showAllProduct() as $product) {
     echo "ID: {$product['id']}, Name: {$product['name']}, Price: {$product['price']}, Category: {$product['category']}\n";
 }
 
-// Hitung total harga kategori Electronics
-$totalElectronics = 0;
-foreach ($products as $product) {
-    if ($product['category'] === 'Electronics') {
-        
-        $totalElectronics += $product['price'];
-    }
-}
+// sum total category electronics
+$totalElectronics = $products->sumTotalByCategory('Electronics');
 echo "Total Electronics: $totalElectronics\n";
 
-// Hitung total harga kategori Furniture
-$totalFurniture = 0;
-foreach ($products as $product) {
-    if ($product['category'] === 'Furniture') {
-        $totalFurniture += $product['price'];
-        
-    }
-}
+// sum total category furniture
+$totalFurniture = $products->sumTotalByCategory('Furniture');
 echo "Total Furniture: $totalFurniture\n";
 
-// Filter produk kategori Electronics
-$electronicsProducts = [];
-foreach ($products as $product) {
-    if ($product['category'] === 'Electronics') {
-        $electronicsProducts[] = $product;
-    }
-}
+
 echo "=== Produk Electronics ===\n";
-foreach ($electronicsProducts as $product) {
+foreach ($products->productsByCategory('Electronics') as $product) {
     echo "ID: {$product['id']}, Name: {$product['name']}, Price: {$product['price']}\n";
-
 }
 
-// Filter produk kategori Furniture
-$furnitureProducts = [];
-foreach ($products as $product) {
-    if ($product['category'] === 'Furniture') {
-        $furnitureProducts[] = $product;
-    }
-}
 echo "=== Produk Furniture ===\n";
-foreach ($furnitureProducts as $product) {
+foreach ($products->productsByCategory('Furniture') as $product) {
     echo "ID: {$product['id']}, Name: {$product['name']}, Price: {$product['price']}\n";
 }
 
-// Tampilkan jumlah produk per kategori
-$electronicsCount = 0;
-$furnitureCount = 0;
-foreach ($products
-as $product) {
-    if ($product['category'] === 'Electronics') {
-        $electronicsCount++;
-    } elseif ($product['category'] === 'Furniture') {
-        $furnitureCount++;
-    }
-}
+// count products
+$electronicsCount = $products->countByCategory('Electronics');
+$furnitureCount =  $products->countByCategory('Furniture');
 echo "Jumlah Produk Electronics: $electronicsCount\n";
 echo "Jumlah Produk Furniture: $furnitureCount\n";
-?>
