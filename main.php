@@ -78,7 +78,6 @@ function showProductsDetail($products, $category)
 showProductsDetail($electronicsProducts, 'Electronics');
 showProductsDetail($furnitureProducts, 'Furniture');
 
-// Tampilkan jumlah produk per kategori
 $electronicsCount = countProductByCategory($products, 'Electronics');
 $furnitureCount = countProductByCategory($products, 'Furniture');
 
