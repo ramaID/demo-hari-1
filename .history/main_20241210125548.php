@@ -39,7 +39,7 @@ function countProductsByCategory($products, $category)
 }
 
 // Tampilkan semua produk
-displayProducts("Produk", $products);
+displayProducts("Semua Produk", $products);
 
 // Hitung total harga per kategori
 $totalElectronics = calculateTotalPriceByCategory($products, 'Electronics');
