@@ -86,4 +86,4 @@ class Products
 }
 
 $product = new Products();
-echo $product->index();
+$product->index();
