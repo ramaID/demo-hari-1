@@ -49,11 +49,11 @@ function filterProductPerCategory($products, $category)
 {
     $filteredProducs = [];
     foreach ($products as $product) {
-        if ($product['category'] === 'Electronics') {
+        if ($product['category'] === $category) {
             $filteredProducs[] = $product;
         }
     }
-    echo "=== Produk Electronics ===\n";
+    echo "=== Produk $category ===\n";
     foreach ($filteredProducs as $product) {
         echo "ID: {$product['id']}, Name: {$product['name']}, Price: {$product['price']}\n";
     }
