@@ -18,7 +18,7 @@ $products = [
     ["id" => 5, "name" => "TV", "price" => 500, "category" => "Electronics"],
 ];
 
-show($products);
+showProducts($products);
 countPricePerCategory($products, 'Electronics');
 countPricePerCategory($products, 'Furniture');
 filterProductPerCategory($products, 'Electronics');
@@ -26,7 +26,7 @@ filterProductPerCategory($products, 'Furniture');
 countProductPerCategory($products, 'Electronics');
 countProductPerCategory($products, 'Furniture');
 
-function show($products)
+function showProducts($products)
 {
     echo "=== Produk ===\n";
     foreach ($products as $product) {
