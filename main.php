@@ -1,79 +1,84 @@
 <?php
+
 // Data produk
 $products = [
-    ["id" => 1, "name" => "Laptop",
-    "price" => 1500, "category" => "Electronics"],
-    ["id" => 2, "name" => "Phone", "price" => 800, "category" => "Electronics"
-],
+    ["id" => 1, "name" => "Laptop", "price" => 1500, "category" => "Electronics"],
+    ["id" => 2, "name" => "Phone", "price" => 800, "category" => "Electronics"],
     ["id" => 3, "name" => "Desk", "price" => 200, "category" => "Furniture"],
     ["id" => 4, "name" => "Chair", "price" => 100, "category" => "Furniture"],
-    ["id" => 5, "name" => "TV", "price" => 500, "category" => "Electronics"]
-    ,
+    ["id" => 5, "name" => "TV", "price" => 500, "category" => "Electronics"],
 ];
 
-// Tampilkan semua produk
-echo "=== Produk ===\n";
-foreach ($products as $product) {
-    
-    echo "ID: {$product['id']}, Name: {$product['name']}, Price: {$product['price']}, Category: {$product['category']}\n";
-}
-
-// Hitung total harga kategori Electronics
-$totalElectronics = 0;
-foreach ($products as $product) {
-    if ($product['category'] === 'Electronics') {
-        
-        $totalElectronics += $product['price'];
+// Fungsi untuk menampilkan semua produk
+function displayAllProducts($products) {
+    echo "=== Produk ===\n";
+    foreach ($products as $product) {
+        echo "ID: {$product['id']}, Name: {$product['name']}, Price: {$product['price']}, Category: {$product['category']}\n";
     }
 }
+
+// Fungsi untuk menghitung total harga berdasarkan kategori
+function calculateTotalPrice($products, $category) {
+    $total = 0;
+    foreach ($products as $product) {
+        if ($product['category'] === $category) {
+            $total += $product['price'];
+        }
+    }
+    return $total;
+}
+
+// Fungsi untuk memfilter produk berdasarkan kategori
+function filterProductsByCategory($products, $category) {
+    $filteredProducts = [];
+    foreach ($products as $product) {
+        if ($product['category'] === $category) {
+            $filteredProducts[] = $product;
+        }
+    }
+    return $filteredProducts;
+}
+
+// Fungsi untuk menampilkan produk dalam kategori tertentu
+function displayCategoryProducts($products, $category) {
+    echo "=== $category ===\n";
+    foreach ($products as $product) {
+        echo "ID: {$product['id']}, Name: {$product['name']}, Price: {$product['price']}\n";
+    }
+}
+
+// Fungsi untuk menghitung jumlah produk berdasarkan kategori
+function countProductsByCategory($products, $category) {
+    $count = 0;
+    foreach ($products as $product) {
+        if ($product['category'] === $category) {
+            $count++;
+        }
+    }
+    return $count;
+}
+
+// Tampilkan semua produk
+displayAllProducts($products);
+
+// Hitung total harga kategori Electronics
+$totalElectronics = calculateTotalPrice($products, 'Electronics');
 echo "Total Electronics: $totalElectronics\n";
 
 // Hitung total harga kategori Furniture
-$totalFurniture = 0;
-foreach ($products as $product) {
-    if ($product['category'] === 'Furniture') {
-        $totalFurniture += $product['price'];
-        
-    }
-}
+$totalFurniture = calculateTotalPrice($products, 'Furniture');
 echo "Total Furniture: $totalFurniture\n";
 
-// Filter produk kategori Electronics
-$electronicsProducts = [];
-foreach ($products as $product) {
-    if ($product['category'] === 'Electronics') {
-        $electronicsProducts[] = $product;
-    }
-}
-echo "=== Produk Electronics ===\n";
-foreach ($electronicsProducts as $product) {
-    echo "ID: {$product['id']}, Name: {$product['name']}, Price: {$product['price']}\n";
+// Filter dan tampilkan produk kategori Electronics
+$electronicsProducts = filterProductsByCategory($products, 'Electronics');
+displayCategoryProducts($electronicsProducts, 'Electronics');
 
-}
-
-// Filter produk kategori Furniture
-$furnitureProducts = [];
-foreach ($products as $product) {
-    if ($product['category'] === 'Furniture') {
-        $furnitureProducts[] = $product;
-    }
-}
-echo "=== Produk Furniture ===\n";
-foreach ($furnitureProducts as $product) {
-    echo "ID: {$product['id']}, Name: {$product['name']}, Price: {$product['price']}\n";
-}
+// Filter dan tampilkan produk kategori Furniture
+$furnitureProducts = filterProductsByCategory($products, 'Furniture');
+displayCategoryProducts($furnitureProducts, 'Furniture');
 
 // Tampilkan jumlah produk per kategori
-$electronicsCount = 0;
-$furnitureCount = 0;
-foreach ($products
-as $product) {
-    if ($product['category'] === 'Electronics') {
-        $electronicsCount++;
-    } elseif ($product['category'] === 'Furniture') {
-        $furnitureCount++;
-    }
-}
+$electronicsCount = countProductsByCategory($products, 'Electronics');
+$furnitureCount = countProductsByCategory($products, 'Furniture');
 echo "Jumlah Produk Electronics: $electronicsCount\n";
 echo "Jumlah Produk Furniture: $furnitureCount\n";
-?>
