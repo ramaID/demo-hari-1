@@ -1,20 +1,20 @@
 <?php
+
 // Data produk
 $products = [
-    ["id" => 1, "name" => "Laptop",
-    "price" => 1500, "category" => "Electronics"],
-    ["id" => 2, "name" => "Phone", "price" => 800, "category" => "Electronics"
-],
-    ["id" => 3, "name" => "Desk", "price" => 200, "category" => "Furniture"],
-    ["id" => 4, "name" => "Chair", "price" => 100, "category" => "Furniture"],
-    ["id" => 5, "name" => "TV", "price" => 500, "category" => "Electronics"]
-    ,
+    ['id' => 1, 'name' => 'Laptop',
+        'price' => 1500, 'category' => 'Electronics'],
+    ['id' => 2, 'name' => 'Phone', 'price' => 800, 'category' => 'Electronics',
+    ],
+    ['id' => 3, 'name' => 'Desk', 'price' => 200, 'category' => 'Furniture'],
+    ['id' => 4, 'name' => 'Chair', 'price' => 100, 'category' => 'Furniture'],
+    ['id' => 5, 'name' => 'TV', 'price' => 500, 'category' => 'Electronics'],
 ];
 
 // Tampilkan semua produk
 echo "=== Produk ===\n";
 foreach ($products as $product) {
-    
+
     echo "ID: {$product['id']}, Name: {$product['name']}, Price: {$product['price']}, Category: {$product['category']}\n";
 }
 
@@ -22,7 +22,7 @@ foreach ($products as $product) {
 $totalElectronics = 0;
 foreach ($products as $product) {
     if ($product['category'] === 'Electronics') {
-        
+
         $totalElectronics += $product['price'];
     }
 }
@@ -33,7 +33,7 @@ $totalFurniture = 0;
 foreach ($products as $product) {
     if ($product['category'] === 'Furniture') {
         $totalFurniture += $product['price'];
-        
+
     }
 }
 echo "Total Furniture: $totalFurniture\n";
@@ -66,8 +66,7 @@ foreach ($furnitureProducts as $product) {
 // Tampilkan jumlah produk per kategori
 $electronicsCount = 0;
 $furnitureCount = 0;
-foreach ($products
-as $product) {
+foreach ($products as $product) {
     if ($product['category'] === 'Electronics') {
         $electronicsCount++;
     } elseif ($product['category'] === 'Furniture') {
@@ -76,4 +75,3 @@ as $product) {
 }
 echo "Jumlah Produk Electronics: $electronicsCount\n";
 echo "Jumlah Produk Furniture: $furnitureCount\n";
-?>
